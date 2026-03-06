@@ -1,42 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 
 <head>
-<title>La mia pagina</title>
+<meta charset="UTF-8">
+<title>Invito ai 18 anni di Serena</title>
+
 <style>
+
 body{
-font-family: Arial;
+background: linear-gradient(180deg,#000000,#1a001a);
+color:#ffd700;
+font-family: "Georgia", serif;
 text-align:center;
-background:#f4f4f4;
+margin:0;
+padding:0;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+padding:40px;
 }
 
 h1{
+color:#ff69b4;
+font-size:40px;
 margin-top:40px;
 }
 
-a{
-display:block;
-margin:20px;
-padding:15px;
-background:#2c7be5;
-color:white;
-text-decoration:none;
-border-radius:8px;
-width:200px;
-margin-left:auto;
-margin-right:auto;
+h2{
+color:#ffd700;
+margin-top:30px;
 }
+
+.location{
+display:inline-block;
+margin-top:40px;
+padding:15px 25px;
+background:#ff69b4;
+color:#000;
+text-decoration:none;
+font-size:20px;
+border-radius:10px;
+font-weight:bold;
+transition:0.3s;
+}
+
+.location:hover{
+background:#ffd700;
+color:#000;
+}
+
+img{
+margin-top:50px;
+max-width:80%;
+border-radius:15px;
+box-shadow:0 0 20px #ff69b4;
+}
+
 </style>
+
 </head>
 
 <body>
 
-<h1>Dashboard</h1>
+<div class="container">
 
-<a href="https://google.com">Google</a>
-<a href="https://youtube.com">YouTube</a>
-<a href="https://github.com">GitHub</a>
+<h1>Serena ti invita ai suoi meravigliosi e fantastici 18 anni</h1>
+
+<h2>Una serata speciale da festeggiare insieme ✨</h2>
+
+<a class="location" href="https://maps.app.goo.gl/hBG8Wvnyr54EpZgt7" target="_blank">
+Ti aspetto all'agriturismo Da Brizi
+</a>
+
+<br>
+
+<img src="serena18.jpg" alt="Invito ai 18 anni">
+
+</div>
 
 </body>
-
 </html>

@@ -192,12 +192,13 @@ document.getElementById("popup").style.display="none";
 
 /* MUSICA ON/OFF */
 function toggleMusic(){
-if(music.paused){
-music.play();
-musicButton.innerText="Ferma musica";
+
+if(music.muted){
+music.muted = false;
+musicButton.innerText = "Ferma musica";
 }else{
-music.pause();
-musicButton.innerText="Riprendi musica";
+music.muted = true;
+musicButton.innerText = "Attiva musica";
 }
 }
 

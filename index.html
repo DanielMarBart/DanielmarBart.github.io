@@ -11,13 +11,12 @@
 body{
 margin:0;
 background:black;
-font-family:Arial;
+font-family:Arial, sans-serif;
 overflow:hidden;
 text-align:center;
 }
 
 /* CONTENITORE VIDEO */
-
 #videoContainer{
 position:fixed;
 top:0;
@@ -31,7 +30,6 @@ overflow:hidden;
 }
 
 /* VIDEO */
-
 #video{
 width:100%;
 height:100%;
@@ -39,14 +37,14 @@ object-fit:cover;
 }
 
 /* TESTO FINALE */
-
 #finalText{
 position:absolute;
-top:50%;
+top:45%; /* leggermente più in alto */
 left:50%;
 transform:translate(-50%,-50%);
 color:black;
-font-size:48px;
+font-size:36px; /* leggermente più piccolo */
+font-family: 'Georgia', serif; /* font elegante */
 font-weight:bold;
 width:70%;
 display:none;
@@ -54,7 +52,6 @@ text-align:center;
 }
 
 /* PULSANTE MUSICA */
-
 #musicButton{
 position:absolute;
 top:20px;
@@ -69,7 +66,6 @@ z-index:5;
 }
 
 /* PULSANTE APERTURA */
-
 #openButton{
 position:absolute;
 bottom:80px;
@@ -85,7 +81,6 @@ cursor:pointer;
 }
 
 /* PULSANTI FINALI */
-
 #buttons{
 position:absolute;
 bottom:60px;
@@ -96,17 +91,19 @@ gap:20px;
 }
 
 .circle{
-width:120px;
-height:120px;
+width:60px;  /* metà dimensione precedente */
+height:60px;
 border-radius:50%;
 border:none;
-font-size:40px;
+font-size:20px; /* ridotto */
 cursor:pointer;
 background:white;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
 /* POPUP */
-
 #popup{
 position:fixed;
 top:0;
@@ -155,8 +152,7 @@ Sei ufficialmente invitato al mio meraviglioso compleanno
 
 <button class="circle" onclick="showInfo()">i</button>
 
-<button class="circle"
-onclick="window.open('https://maps.app.goo.gl/hBG8Wvnyr54EpZgt7')">
+<button class="circle" onclick="window.open('https://maps.app.goo.gl/hBG8Wvnyr54EpZgt7')">
 📍
 </button>
 
@@ -178,33 +174,26 @@ let finalText = document.getElementById("finalText");
 let musicButton = document.getElementById("musicButton");
 
 openButton.onclick = function(){
-
 video.play();
 music.play();
-
 openButton.style.display="none";
 
 video.onended = function(){
 buttons.style.display="flex";
 finalText.style.display="block";
 }
-
 }
 
 /* POPUP INFO */
-
 function showInfo(){
 document.getElementById("popup").style.display="flex";
 }
-
 function closePopup(){
 document.getElementById("popup").style.display="none";
 }
 
 /* MUSICA ON/OFF */
-
 function toggleMusic(){
-
 if(music.paused){
 music.play();
 musicButton.innerText="Ferma musica";
@@ -212,28 +201,22 @@ musicButton.innerText="Ferma musica";
 music.pause();
 musicButton.innerText="Riprendi musica";
 }
-
 }
 
 /* PULL TO REFRESH */
-
 let startY = 0;
 let endY = 0;
 
 document.addEventListener("touchstart", function(e){
 startY = e.touches[0].clientY;
 });
-
 document.addEventListener("touchmove", function(e){
 endY = e.touches[0].clientY;
 });
-
 document.addEventListener("touchend", function(){
-
 if(endY - startY > 120){
 location.reload();
 }
-
 });
 
 </script>

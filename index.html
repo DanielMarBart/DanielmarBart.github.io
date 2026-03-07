@@ -47,15 +47,15 @@ object-fit:cover;
 position:absolute;
 top:20px;
 right:5px;
-padding:4px 10px; /* più piccolo */
-font-size:11px; /* testo più piccolo */
+padding:4px 10px;
+font-size:11px;
 border-radius:16px;
 border:none;
 background:rgba(255,255,255,0.5); /* semi trasparente */
 color:black;
 cursor:pointer;
 z-index:5;
-display:none; /* nascosto all'inizio */
+display:none; /* nascosto inizialmente */
 }
 
 /* PULSANTE APERTURA */
@@ -68,7 +68,7 @@ padding:15px 50px;
 font-size:26px;
 border-radius:30px;
 border:2px solid #666;
-background:#888; /* grigio */
+background:#888;
 color:white;
 cursor:pointer;
 white-space:nowrap;
@@ -166,6 +166,7 @@ openButton.onclick = function(){
 video.play();
 music.play();
 openButton.style.display="none";
+musicButton.style.display="block"; /* mostra il pulsante musica */
 
 video.onended = function(){
 buttons.style.display="flex";

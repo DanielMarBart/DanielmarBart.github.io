@@ -51,11 +51,11 @@ padding:4px 10px;
 font-size:11px;
 border-radius:16px;
 border:none;
-background:rgba(255,255,255,0.5); /* semi trasparente */
+background:rgba(255,255,255,0.5);
 color:black;
 cursor:pointer;
 z-index:5;
-display:none; /* nascosto inizialmente */
+display:none;
 }
 
 /* PULSANTE APERTURA */
@@ -140,7 +140,7 @@ font-size:22px;
 
 <div id="buttons">
 
-<button class="circle" onclick="showInfo()">i</button>
+<button class="circle" onclick="showInfo()">ℹ️</button>
 
 <button class="circle" onclick="window.open('https://maps.app.goo.gl/hBG8Wvnyr54EpZgt7')">
 📍
@@ -163,14 +163,22 @@ let buttons = document.getElementById("buttons");
 let musicButton = document.getElementById("musicButton");
 
 openButton.onclick = function(){
+
+openButton.style.display="none";
+
+/* attesa di 3 secondi prima di far partire tutto */
+setTimeout(function(){
+
 video.play();
 music.play();
-openButton.style.display="none";
-musicButton.style.display="block"; /* mostra il pulsante musica */
+musicButton.style.display="block";
 
 video.onended = function(){
 buttons.style.display="flex";
 }
+
+}, 3000);
+
 }
 
 /* POPUP INFO */

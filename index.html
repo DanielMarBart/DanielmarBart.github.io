@@ -3,82 +3,139 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Invito ai 18 anni di Serena</title>
+<title>Invito Serena 18</title>
 
 <style>
 
 body{
-background: linear-gradient(180deg,#000000,#1a001a);
-color:#ffd700;
-font-family: "Georgia", serif;
-text-align:center;
 margin:0;
-padding:0;
+background:black;
+font-family:Arial;
+overflow:hidden;
+text-align:center;
 }
 
-.container{
-max-width:800px;
-margin:auto;
-padding:40px;
+#video{
+position:fixed;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-1;
 }
 
-h1{
-color:#ff69b4;
-font-size:40px;
-margin-top:40px;
-}
-
-h2{
-color:#ffd700;
-margin-top:30px;
-}
-
-.location{
-display:inline-block;
-margin-top:40px;
-padding:15px 25px;
-background:#ff69b4;
-color:#000;
-text-decoration:none;
+#openButton{
+position:absolute;
+bottom:80px;
+left:50%;
+transform:translateX(-50%);
+padding:15px 35px;
 font-size:20px;
+border-radius:30px;
+border:2px solid white;
+background:transparent;
+color:white;
+cursor:pointer;
+}
+
+#buttons{
+position:absolute;
+bottom:60px;
+width:100%;
+display:none;
+justify-content:center;
+gap:20px;
+}
+
+.circle{
+width:60px;
+height:60px;
+border-radius:50%;
+border:none;
+font-size:28px;
+cursor:pointer;
+background:white;
+}
+
+#popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+display:none;
+justify-content:center;
+align-items:center;
+}
+
+#popupContent{
+background:white;
+padding:30px;
 border-radius:10px;
-font-weight:bold;
-transition:0.3s;
-}
-
-.location:hover{
-background:#ffd700;
-color:#000;
-}
-
-img{
-margin-top:50px;
-max-width:80%;
-border-radius:15px;
-box-shadow:0 0 20px #ff69b4;
+font-size:22px;
 }
 
 </style>
-
 </head>
 
 <body>
 
-<div class="container">
+<video id="video" preload="auto">
+<source src="video.mp4" type="video/mp4">
+</video>
 
-<h1>Serena ti invita ai suoi meravigliosi e fantastici 18 anni</h1>
+<audio id="music">
+<source src="musica.mp3" type="audio/mpeg">
+</audio>
 
-<h2>Una serata speciale da festeggiare insieme ✨</h2>
+<button id="openButton">Tocca per aprire</button>
 
-<a class="location" href="https://maps.app.goo.gl/hBG8Wvnyr54EpZgt7" target="_blank">
-Ti aspetto all'agriturismo Da Brizi
-</a>
+<div id="buttons">
 
-<br>
+<button class="circle" onclick="showInfo()">i</button>
 
-<img src="serena18.jpg" alt="Invito ai 18 anni">
+<button class="circle"
+onclick="window.open('https://maps.app.goo.gl/hBG8Wvnyr54EpZgt7')">
+📍
+</button>
 
 </div>
+
+<div id="popup" onclick="closePopup()">
+<div id="popupContent">
+Dress code Arancione come le zucche 🎃
+</div>
+</div>
+
+<script>
+
+let video = document.getElementById("video");
+let music = document.getElementById("music");
+let openButton = document.getElementById("openButton");
+let buttons = document.getElementById("buttons");
+
+openButton.onclick = function(){
+
+video.play();
+music.play();
+
+openButton.style.display="none";
+
+video.onended = function(){
+buttons.style.display="flex";
+}
+
+}
+
+function showInfo(){
+document.getElementById("popup").style.display="flex";
+}
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+
+</script>
 
 </body>
 </html>

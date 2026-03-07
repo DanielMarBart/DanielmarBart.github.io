@@ -8,7 +8,11 @@
 }
 
 <style>
-
+/* Dichiarazione del font personalizzato */
+@font-face {
+  font-family: "miofont";
+  src: url("miofont.ttf");
+}
 
 body{
 margin:0;
@@ -46,7 +50,7 @@ left:50%;
 transform:translate(-50%,-50%);
 color:black;
 font-size:40px;
-font-family:"MioFont"; 
+font-family:"miofont"; 
 font-weight:normal;
 width:60%;
 display:none;
@@ -57,9 +61,9 @@ text-align:center;
 #musicButton{
 position:absolute;
 top:20px;
-right:20px;
-padding:10px 20px;
-font-size:16px;
+right:15px;        /* spostato leggermente più verso destra */
+padding:8px 18px;  /* leggermente più piccolo */
+font-size:14px;     /* leggermente più piccolo */
 border-radius:20px;
 border:none;
 background:white;

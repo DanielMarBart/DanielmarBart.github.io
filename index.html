@@ -16,12 +16,41 @@ text-align:center;
 }
 
 #video{
-position:center;
 width:100%;
 height:100%;
 object-fit:cover;
 z-index:-1;
 }
+
+/* TESTO FINALE */
+
+#finalText{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+color:white;
+font-size:40px;
+width:80%;
+display:none;
+}
+
+/* PULSANTE MUSICA */
+
+#musicButton{
+position:absolute;
+top:20px;
+right:20px;
+padding:10px 20px;
+font-size:16px;
+border-radius:20px;
+border:none;
+background:white;
+cursor:pointer;
+z-index:5;
+}
+
+/* PULSANTE APERTURA */
 
 #openButton{
 position:absolute;
@@ -37,6 +66,8 @@ color:white;
 cursor:pointer;
 }
 
+/* PULSANTI FINALI */
+
 #buttons{
 position:absolute;
 bottom:60px;
@@ -51,10 +82,12 @@ width:120px;
 height:120px;
 border-radius:50%;
 border:none;
-font-size:28px;
+font-size:40px;
 cursor:pointer;
 background:white;
 }
+
+/* POPUP */
 
 #popup{
 position:fixed;
@@ -88,6 +121,12 @@ font-size:22px;
 <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
+<button id="musicButton" onclick="toggleMusic()">Ferma musica</button>
+
+<div id="finalText">
+Sei ufficialmente invitato al mio meraviglioso compleanno
+</div>
+
 <button id="openButton">Tocca per aprire</button>
 
 <div id="buttons">
@@ -113,6 +152,8 @@ let video = document.getElementById("video");
 let music = document.getElementById("music");
 let openButton = document.getElementById("openButton");
 let buttons = document.getElementById("buttons");
+let finalText = document.getElementById("finalText");
+let musicButton = document.getElementById("musicButton");
 
 openButton.onclick = function(){
 
@@ -123,9 +164,12 @@ openButton.style.display="none";
 
 video.onended = function(){
 buttons.style.display="flex";
+finalText.style.display="block";
 }
 
 }
+
+/* POPUP INFO */
 
 function showInfo(){
 document.getElementById("popup").style.display="flex";
@@ -133,6 +177,20 @@ document.getElementById("popup").style.display="flex";
 
 function closePopup(){
 document.getElementById("popup").style.display="none";
+}
+
+/* MUSICA ON/OFF */
+
+function toggleMusic(){
+
+if(music.paused){
+music.play();
+musicButton.innerText="Ferma musica";
+}else{
+music.pause();
+musicButton.innerText="Riprendi musica";
+}
+
 }
 
 </script>

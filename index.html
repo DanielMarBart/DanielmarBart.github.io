@@ -1,117 +1,240 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gioco</title>
+<title>Invito Serena 18</title>
 
 <style>
-html, body {
-margin: 0;
-padding: 0;
-overflow: hidden;
-background: black;
-font-family: sans-serif;
+
+body{
+margin:0;
+background:black;
+font-family:Arial;
+overflow:hidden;
+text-align:center;
 }
 
-canvas {
-position: absolute;
-top: 0;
-left: 0;
+/* CONTENITORE VIDEO */
+
+#videoContainer{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
 }
 
-#ui {
-position: fixed;
-bottom: 20px;
-left: 50%;
-transform: translateX(-50%);
-z-index: 10;
+/* VIDEO */
+
+#video{
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
-button {
-font-size: 18px;
-padding: 12px 20px;
-border: none;
-border-radius: 10px;
-background: #ffffff;
+/* TESTO FINALE */
+
+#finalText{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+color:black;
+font-size:48px;
+font-weight:bold;
+width:70%;
+display:none;
+text-align:center;
 }
+
+/* PULSANTE MUSICA */
+
+#musicButton{
+position:absolute;
+top:20px;
+right:20px;
+padding:10px 20px;
+font-size:16px;
+border-radius:20px;
+border:none;
+background:white;
+cursor:pointer;
+z-index:5;
+}
+
+/* PULSANTE APERTURA */
+
+#openButton{
+position:absolute;
+bottom:80px;
+left:50%;
+transform:translateX(-50%);
+padding:20px 50px;
+font-size:26px;
+border-radius:30px;
+border:2px solid white;
+background:transparent;
+color:white;
+cursor:pointer;
+}
+
+/* PULSANTI FINALI */
+
+#buttons{
+position:absolute;
+bottom:60px;
+width:100%;
+display:none;
+justify-content:center;
+gap:20px;
+}
+
+.circle{
+width:120px;
+height:120px;
+border-radius:50%;
+border:none;
+font-size:40px;
+cursor:pointer;
+background:white;
+}
+
+/* POPUP */
+
+#popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+display:none;
+justify-content:center;
+align-items:center;
+}
+
+#popupContent{
+background:white;
+padding:30px;
+border-radius:10px;
+font-size:22px;
+}
+
 </style>
 </head>
 
 <body>
 
-<canvas id="game"></canvas>
+<div id="videoContainer">
 
-<div id="ui">
-<button onclick="spawn()">Spawn</button>
+<video id="video" preload="auto">
+<source src="video.mp4" type="video/mp4">
+</video>
+
+<div id="finalText">
+Sei ufficialmente invitato al mio meraviglioso compleanno
+</div>
+
+</div>
+
+<audio id="music">
+<source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicButton" onclick="toggleMusic()">Ferma musica</button>
+
+<button id="openButton">Tocca per aprire</button>
+
+<div id="buttons">
+
+<button class="circle" onclick="showInfo()">i</button>
+
+<button class="circle"
+onclick="window.open('https://maps.app.goo.gl/hBG8Wvnyr54EpZgt7')">
+📍
+</button>
+
+</div>
+
+<div id="popup" onclick="closePopup()">
+<div id="popupContent">
+Dress code Arancione come le zucche 🎃
+</div>
 </div>
 
 <script>
 
-const canvas = document.getElementById("game")
-const ctx = canvas.getContext("2d")
+let video = document.getElementById("video");
+let music = document.getElementById("music");
+let openButton = document.getElementById("openButton");
+let buttons = document.getElementById("buttons");
+let finalText = document.getElementById("finalText");
+let musicButton = document.getElementById("musicButton");
 
-function resize(){
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
+openButton.onclick = function(){
+
+video.play();
+music.play();
+
+openButton.style.display="none";
+
+video.onended = function(){
+buttons.style.display="flex";
+finalText.style.display="block";
 }
-
-resize()
-window.addEventListener("resize", resize)
-
-let objects = []
-
-function spawn(){
-
-objects.push({
-x: Math.random()*canvas.width,
-y: Math.random()*canvas.height,
-r: 20 + Math.random()*30
-})
-
-}
-
-function update(){
-
-ctx.clearRect(0,0,canvas.width,canvas.height)
-
-ctx.fillStyle = "white"
-
-for(let o of objects){
-
-ctx.beginPath()
-ctx.arc(o.x,o.y,o.r,0,Math.PI*2)
-ctx.fill()
 
 }
 
-requestAnimationFrame(update)
+/* POPUP INFO */
+
+function showInfo(){
+document.getElementById("popup").style.display="flex";
 }
 
-update()
-
-/* ---------------------------
-PULL TO REFRESH MOBILE
---------------------------- */
-
-let touchStartY = 0
-let touchEndY = 0
-
-document.addEventListener("touchstart", e => {
-touchStartY = e.touches[0].clientY
-})
-
-document.addEventListener("touchmove", e => {
-touchEndY = e.touches[0].clientY
-})
-
-document.addEventListener("touchend", () => {
-
-if(touchEndY - touchStartY > 120){
-location.reload()
+function closePopup(){
+document.getElementById("popup").style.display="none";
 }
 
-})
+/* MUSICA ON/OFF */
+
+function toggleMusic(){
+
+if(music.paused){
+music.play();
+musicButton.innerText="Ferma musica";
+}else{
+music.pause();
+musicButton.innerText="Riprendi musica";
+}
+
+}
+
+/* PULL TO REFRESH */
+
+let startY = 0;
+let endY = 0;
+
+document.addEventListener("touchstart", function(e){
+startY = e.touches[0].clientY;
+});
+
+document.addEventListener("touchmove", function(e){
+endY = e.touches[0].clientY;
+});
+
+document.addEventListener("touchend", function(){
+
+if(endY - startY > 120){
+location.reload();
+}
+
+});
 
 </script>
 

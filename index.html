@@ -2,225 +2,231 @@
 <html lang="it">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Invito Serena 18</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invito Serena 18</title>
 
-<style>
+  <style>
+    /* Dichiarazione del font personalizzato */
+    @font-face {
+      font-family: "miofont";
+      src: url("miofont.ttf");
+    }
 
-/* Dichiarazione del font personalizzato */
-@font-face {
-  font-family: "miofont";
-  src: url("miofont.ttf");
-}
+    body {
+      margin: 0;
+      background: black;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      text-align: center;
+    }
 
-body{
-margin:0;
-background:black;
-font-family:Arial, sans-serif;
-overflow:hidden;
-text-align:center;
-}
+    /* CONTENITORE VIDEO */
+    #videoContainer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
 
-/* CONTENITORE VIDEO */
-#videoContainer{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-display:flex;
-justify-content:center;
-align-items:center;
-overflow:hidden;
-}
+    /* VIDEO */
+    #video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-/* VIDEO */
-#video{
-width:100%;
-height:100%;
-object-fit:cover;
-}
+    /* PULSANTE MUSICA */
+    #musicButton {
+      position: absolute;
+      top: 20px;
+      right: 5px;
+      padding: 4px 10px;
+      font-size: 11px;
+      border-radius: 16px;
+      border: none;
+      background: rgba(255, 255, 255, 0.5);
+      color: black;
+      cursor: pointer;
+      z-index: 5;
+      display: none;
+    }
 
-/* PULSANTE MUSICA */
-#musicButton{
-position:absolute;
-top:20px;
-right:5px;
-padding:4px 10px;
-font-size:11px;
-border-radius:16px;
-border:none;
-background:rgba(255,255,255,0.5);
-color:black;
-cursor:pointer;
-z-index:5;
-display:none;
-}
+    /* PULSANTE APERTURA */
+    #openButton {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 15px 50px;
+      font-size: 26px;
+      border-radius: 30px;
+      border: 2px solid #666;
+      background: #888;
+      color: white;
+      cursor: pointer;
+      white-space: nowrap;
+      z-index: 4;
+    }
 
-/* PULSANTE APERTURA */
-#openButton{
-position:absolute;
-bottom:80px;
-left:50%;
-transform:translateX(-50%);
-padding:15px 50px;
-font-size:26px;
-border-radius:30px;
-border:2px solid #666;
-background:#888;
-color:white;
-cursor:pointer;
-white-space:nowrap;
-}
+    /* PULSANTI FINALI */
+    #buttons {
+      position: absolute;
+      bottom: 60px;
+      width: 100%;
+      display: none;
+      justify-content: center;
+      gap: 20px;
+      z-index: 4;
+    }
 
-/* PULSANTI FINALI */
-#buttons{
-position:absolute;
-bottom:60px;
-width:100%;
-display:none;
-justify-content:center;
-gap:20px;
-}
+    .circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-.circle{
-width:50px;
-height:50px;
-border-radius:50%;
-border:none;
-font-size:18px;
-cursor:pointer;
-background:white;
-display:flex;
-justify-content:center;
-align-items:center;
-}
+    /* POPUP */
+    #popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 6;
+    }
 
-/* POPUP */
-#popup{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.7);
-display:none;
-justify-content:center;
-align-items:center;
-}
-
-#popupContent{
-background:white;
-padding:30px;
-border-radius:10px;
-font-size:22px;
-}
-
-</style>
+    #popupContent {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      font-size: 22px;
+    }
+  </style>
 </head>
 
 <body>
 
-<div id="videoContainer">
+  <div id="videoContainer">
+    <!-- playsinline + webkit-playsinline + muted per iPhone -->
+    <video id="video" preload="auto" playsinline webkit-playsinline muted>
+      <source src="video.mp4" type="video/mp4">
+    </video>
+  </div>
 
-<video id="video" preload="auto">
-<source src="video.mp4" type="video/mp4">
-</video>
+  <audio id="music">
+    <source src="musica.mp3" type="audio/mpeg">
+  </audio>
 
-</div>
+  <button id="musicButton" onclick="toggleMusic()">Ferma musica</button>
 
-<audio id="music">
-<source src="musica.mp3" type="audio/mpeg">
-</audio>
+  <button id="openButton">Tocca per aprire</button>
 
-<button id="musicButton" onclick="toggleMusic()">Ferma musica</button>
+  <div id="buttons">
+    <button class="circle" onclick="showInfo()">ℹ️</button>
 
-<button id="openButton">Tocca per aprire</button>
+    <button class="circle" onclick="window.open('https://maps.app.goo.gl/hBG8Wvnyr54EpZgt7')">
+      📍
+    </button>
+  </div>
 
-<div id="buttons">
+  <div id="popup" onclick="closePopup()">
+    <div id="popupContent">
+      Dress code 👗: No Rosa e No Rosso
+    </div>
+  </div>
 
-<button class="circle" onclick="showInfo()">ℹ️</button>
+  <script>
+    let video = document.getElementById("video");
+    let music = document.getElementById("music");
+    let openButton = document.getElementById("openButton");
+    let buttons = document.getElementById("buttons");
+    let musicButton = document.getElementById("musicButton");
 
-<button class="circle" onclick="window.open('https://maps.app.goo.gl/hBG8Wvnyr54EpZgt7')">
-📍
-</button>
+    openButton.onclick = function () {
+      openButton.style.display = "none";
 
-</div>
+      // se vuoi un ritardo, rimetti 300 al posto di 0
+      setTimeout(function () {
+        // togliamo il mute dal video dopo il tap dell’utente
+        video.muted = false;
 
-<div id="popup" onclick="closePopup()">
-<div id="popupContent">
-Dress code 👗: No Rosa e No Rosso
-</div>
-</div>
+        video.play().catch((err) => {
+          console.log("Video non è partito:", err);
+        });
 
-<script>
+        music.play().then(() => {
+          musicButton.style.display = "block";
+        }).catch((err) => {
+          console.log("Safari ha bloccato l’audio, potrebbe servire un altro tap:", err);
+          // in ogni caso mostriamo il pulsante per dare controllo all’utente
+          musicButton.style.display = "block";
+        });
 
-let video = document.getElementById("video");
-let music = document.getElementById("music");
-let openButton = document.getElementById("openButton");
-let buttons = document.getElementById("buttons");
-let musicButton = document.getElementById("musicButton");
+        video.onended = function () {
+          buttons.style.display = "flex";
+        };
+      }, 0);
+    };
 
-openButton.onclick = function(){
+    /* POPUP INFO */
+    function showInfo() {
+      document.getElementById("popup").style.display = "flex";
+    }
 
-openButton.style.display="none";
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
 
-/* attesa di 3 secondi prima di far partire tutto */
-setTimeout(function(){
+    /* MUSICA ON/OFF */
+    function toggleMusic() {
+      if (music.muted) {
+        music.muted = false;
+        musicButton.innerText = "Ferma musica";
+      } else {
+        music.muted = true;
+        musicButton.innerText = "Attiva musica";
+      }
+    }
 
-video.play();
-music.play();
-musicButton.style.display="block";
+    /* PULL TO REFRESH */
+    let startY = 0;
+    let endY = 0;
 
-video.onended = function(){
-buttons.style.display="flex";
-}
+    document.addEventListener("touchstart", function (e) {
+      if (e.touches && e.touches.length > 0) {
+        startY = e.touches[0].clientY;
+      }
+    });
 
-}, 0); //300
+    document.addEventListener("touchmove", function (e) {
+      if (e.touches && e.touches.length > 0) {
+        endY = e.touches[0].clientY;
+      }
+    });
 
-}
-
-/* POPUP INFO */
-function showInfo(){
-document.getElementById("popup").style.display="flex";
-}
-
-function closePopup(){
-document.getElementById("popup").style.display="none";
-}
-
-/* MUSICA ON/OFF */
-function toggleMusic(){
-
-if(music.muted){
-music.muted = false;
-musicButton.innerText = "Ferma musica";
-}else{
-music.muted = true;
-musicButton.innerText = "Attiva musica";
-}
-}
-
-/* PULL TO REFRESH */
-let startY = 0;
-let endY = 0;
-
-document.addEventListener("touchstart", function(e){
-startY = e.touches[0].clientY;
-});
-
-document.addEventListener("touchmove", function(e){
-endY = e.touches[0].clientY;
-});
-
-document.addEventListener("touchend", function(){
-if(endY - startY > 120){
-location.reload();
-}
-});
-
-</script>
+    document.addEventListener("touchend", function () {
+      if (endY - startY > 120) {
+        location.reload();
+      }
+    });
+  </script>
 
 </body>
 </html>
